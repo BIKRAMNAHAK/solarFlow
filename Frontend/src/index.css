@@ -1,0 +1,871 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap');
+
+:root {
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --solar-amber: #f59e0b;
+  --solar-orange: #ea580c;
+  --solar-flame: #ff5722;
+  --accent-emerald: #10b981;
+  --accent-cyan: #06b6d4;
+  --accent-purple: #8b5cf6;
+  --accent-rose: #ec4899;
+  --dark-navy: #090e1a;
+  --sidebar-bg: #0b1120;
+  --sidebar-border: #1e293b;
+  --card-bg: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border-light: #e2e8f0;
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 15px; /* Clean Medium Font Size */
+  color: var(--text-main);
+  background-color: #eef2f6; /* Smoke White - Clear contrast against white & colorful cards */
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+
+.bg-light {
+  background-color: #eef2f6 !important;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ===================================================
+   ANIMATIONS & KEYFRAMES
+   =================================================== */
+@keyframes floatSlow {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+}
+
+@keyframes pulseGreen {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+  70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+@keyframes shimmerEffect {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.anim-float {
+  animation: floatSlow 3.5s ease-in-out infinite;
+}
+
+.anim-pulse-amber {
+  animation: pulseGlow 2s infinite;
+}
+
+.anim-pulse-green {
+  animation: pulseGreen 2s infinite;
+}
+
+/* ===================================================
+   VIBRANT COLORFUL GRADIENT TEXT
+   =================================================== */
+.gradient-text-solar {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ff5722 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.gradient-text-emerald {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 50%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.gradient-text-blue {
+  background: linear-gradient(135deg, #60a5fa 0%, #2563eb 50%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.gradient-text-sunset {
+  background: linear-gradient(135deg, #f43f5e 0%, #fb7185 50%, #f97316 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* ===================================================
+   COLORFUL MODERN CARDS WITH GLOW
+   =================================================== */
+.color-card-amber {
+  background: #ffffff;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-top: 4px solid #f59e0b;
+  border-radius: 14px;
+  transition: all 0.25s ease;
+}
+.color-card-amber:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px -8px rgba(245, 158, 11, 0.28);
+}
+
+.color-card-blue {
+  background: #ffffff;
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  border-top: 4px solid #2563eb;
+  border-radius: 14px;
+  transition: all 0.25s ease;
+}
+.color-card-blue:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px -8px rgba(37, 99, 235, 0.28);
+}
+
+.color-card-emerald {
+  background: #ffffff;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-top: 4px solid #10b981;
+  border-radius: 14px;
+  transition: all 0.25s ease;
+}
+.color-card-emerald:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px -8px rgba(16, 185, 129, 0.28);
+}
+
+.color-card-purple {
+  background: #ffffff;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-top: 4px solid #8b5cf6;
+  border-radius: 14px;
+  transition: all 0.25s ease;
+}
+.color-card-purple:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px -8px rgba(139, 92, 246, 0.28);
+}
+
+/* Glowing Icon Boxes */
+.icon-box-amber {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(234, 88, 12, 0.15) 100%);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon-box-blue {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(6, 182, 212, 0.15) 100%);
+  color: #2563eb;
+  border: 1px solid rgba(37, 99, 235, 0.3);
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon-box-emerald {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.15) 100%);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon-box-purple {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(236, 72, 153, 0.15) 100%);
+  color: #7c3aed;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Animated Gradient Buttons */
+.btn-solar-gradient {
+  background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+  color: #ffffff;
+  border: none;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+}
+.btn-solar-gradient:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+}
+
+.btn-cyan-gradient {
+  background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+  color: #ffffff;
+  border: none;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+}
+.btn-cyan-gradient:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5);
+}
+
+.btn-emerald-gradient {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  border: none;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+}
+.btn-emerald-gradient:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+}
+
+/* Soft Badges */
+.badge-soft-primary {
+  background-color: rgba(37, 99, 235, 0.12);
+  color: #2563eb;
+  font-weight: 600;
+}
+.badge-soft-warning {
+  background-color: rgba(245, 158, 11, 0.15);
+  color: #b45309;
+  font-weight: 600;
+}
+.badge-soft-success {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #065f46;
+  font-weight: 600;
+}
+.badge-soft-purple {
+  background-color: rgba(139, 92, 246, 0.15);
+  color: #6d28d9;
+  font-weight: 600;
+}
+
+/* Glassmorphism Dark Banner */
+.glass-banner {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Accordion Banner Modern Styling */
+.accordion-banner {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+.accordion-banner .accordion-item {
+  background: transparent !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+.accordion-banner .accordion-button {
+  background: transparent !important;
+  color: #f8fafc !important;
+  box-shadow: none !important;
+  transition: all 0.2s ease;
+}
+.accordion-banner .accordion-button:not(.collapsed) {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #fbbf24 !important;
+}
+.accordion-banner .accordion-button::after {
+  filter: invert(1);
+}
+
+/* Card Hover Lift & Glow */
+.card-hover-lift {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1);
+}
+
+/* Attractive Collapsible Admin Sidebar */
+.admin-sidebar {
+  width: 260px;
+  min-height: calc(100vh - 60px);
+  background: #0b1120;
+  border-right: 1px solid #1e293b;
+  color: #94a3b8;
+  padding: 1.25rem 0.75rem;
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1), padding 0.25s ease;
+  flex-shrink: 0;
+}
+
+.admin-sidebar.sidebar-collapsed {
+  width: 72px !important;
+  padding: 1.25rem 0.5rem !important;
+}
+
+.admin-sidebar.sidebar-expanded {
+  width: 260px !important;
+}
+
+.admin-sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  color: #94a3b8;
+  border-radius: 10px;
+  margin-bottom: 4px;
+  transition: all 0.2s ease;
+  font-size: 15px; /* Strict 14 ~ 16px range requirement */
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.admin-sidebar-link.collapsed-link {
+  justify-content: center !important;
+  padding: 12px 0 !important;
+}
+
+.admin-sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+  transform: translateX(2px);
+}
+
+.admin-sidebar-link.collapsed-link:hover {
+  transform: scale(1.08);
+}
+
+.admin-sidebar-link.active {
+  background: linear-gradient(90deg, rgba(2, 132, 199, 0.25) 0%, rgba(2, 132, 199, 0.08) 100%);
+  color: #38bdf8;
+  font-weight: 600;
+  border-left: 3px solid #38bdf8;
+}
+
+.admin-sidebar-link.collapsed-link.active {
+  border-left: none;
+  background: rgba(2, 132, 199, 0.25);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+}
+
+.admin-main-content {
+  flex: 1;
+  background-color: #eef2f6; /* Smoke White - High contrast separation against white cards */
+  min-height: calc(100vh - 60px);
+  padding: 24px;
+}
+
+/* Floating WhatsApp Button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  color: white;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.4);
+  z-index: 1000;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: pulseGreen 2.5s infinite;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.6);
+  color: white;
+}
+
+/* ===================================================
+   EXCEL-STYLE ATTENDANCE SHEET GRID STYLES
+   =================================================== */
+.excel-container {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.excel-ribbon {
+  background: #f1f5f9;
+  border-bottom: 2px solid #cbd5e1;
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.excel-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+}
+
+.excel-table th {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  padding: 10px 12px;
+  font-weight: 600;
+  color: #334155;
+  text-align: center;
+}
+
+.excel-table td {
+  border: 1px solid #e2e8f0;
+  padding: 6px 8px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.excel-table tr:hover td {
+  background-color: #f8fafc;
+}
+
+/* Excel Clickable Cell */
+.excel-cell-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.excel-cell-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.cell-present {
+  background-color: #dcfce7;
+  color: #15803d;
+  border-color: #86efac;
+}
+
+.cell-absent {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border-color: #fca5a5;
+}
+
+.cell-halfday {
+  background-color: #fef3c7;
+  color: #b45309;
+  border-color: #fde047;
+}
+
+.cell-leave {
+  background-color: #e0f2fe;
+  color: #0369a1;
+  border-color: #7dd3fc;
+}
+
+.cell-empty {
+  background-color: #ffffff;
+  color: #94a3b8;
+  border: 1px dashed #cbd5e1;
+}
+
+/* ===================================================
+   TALLY / BANK STATEMENT PASSBOOK STYLES
+   =================================================== */
+.tally-passbook {
+  background: #ffffff;
+  border: 2px solid #0f172a;
+  border-radius: 10px;
+  font-family: var(--font-sans);
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+}
+
+.tally-top-banner {
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tally-meta-bar {
+  background: #f1f5f9;
+  border-bottom: 1.5px solid #cbd5e1;
+  padding: 12px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  font-size: 0.92rem;
+}
+
+.tally-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.tally-table th {
+  background: #e2e8f0;
+  color: #0f172a;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  padding: 10px 14px;
+  border-bottom: 2px solid #0f172a;
+  border-right: 1px solid #cbd5e1;
+}
+
+.tally-table th:last-child {
+  border-right: none;
+}
+
+.tally-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+  vertical-align: middle;
+}
+
+.tally-table td:last-child {
+  border-right: none;
+}
+
+.tally-table tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+.tally-debit {
+  color: #dc2626;
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+.tally-credit {
+  color: #16a34a;
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+.tally-balance {
+  color: #0f172a;
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+.tally-footer {
+  background: #f8fafc;
+  border-top: 2px solid #0f172a;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+}
+
+/* Global Icon Anti-Squish Rule */
+svg {
+  flex-shrink: 0 !important;
+}
+
+/* Prevent Oversized Fonts Everywhere - Clean Proportional Medium */
+h1 {
+  font-size: 1.65rem !important;
+  font-weight: 700;
+}
+h2 {
+  font-size: 1.4rem !important;
+  font-weight: 700;
+}
+h3 {
+  font-size: 1.2rem !important;
+  font-weight: 600;
+}
+h4 {
+  font-size: 1.05rem !important;
+  font-weight: 600;
+}
+h5 {
+  font-size: 0.95rem !important;
+  font-weight: 600;
+}
+h6 {
+  font-size: 0.88rem !important;
+  font-weight: 600;
+}
+
+/* Responsive Media Queries For All Devices */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  .admin-main-content {
+    padding: 12px !important;
+  }
+  .card {
+    padding: 1rem !important;
+    border-radius: 10px !important;
+  }
+  .excel-cell-btn {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 0.75rem !important;
+  }
+  .tally-table th, .tally-table td {
+    padding: 8px 10px !important;
+    font-size: 0.82rem !important;
+  }
+  .whatsapp-float {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+    bottom: 16px;
+    right: 16px;
+  }
+}
+
+/* ===================================================
+   VIBRANT COLORFUL FORM DESIGN SYSTEM
+   =================================================== */
+.form-label {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.form-control,
+.form-select {
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 14.5px;
+  color: #0f172a;
+  background-color: #ffffff;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.form-control:hover,
+.form-select:hover {
+  border-color: #94a3b8;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #2563eb !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 0 0 3.5px rgba(37, 99, 235, 0.16), 0 3px 8px rgba(37, 99, 235, 0.08) !important;
+  outline: none !important;
+}
+
+/* Colorful Input Group Text */
+.input-group-text {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.09) 0%, rgba(6, 182, 212, 0.09) 100%);
+  border: 1.5px solid #cbd5e1;
+  color: #2563eb;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 10px 0 0 10px;
+}
+
+.input-group .form-control {
+  border-radius: 0 10px 10px 0;
+}
+
+.input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+  margin-left: -1px;
+}
+
+/* Custom Colorful Range Slider */
+.form-range {
+  height: 1.5rem;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #2563eb 0%, #06b6d4 40%, #f59e0b 80%, #ea580c 100%);
+}
+
+.form-range::-moz-range-track {
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #2563eb 0%, #06b6d4 40%, #f59e0b 80%, #ea580c 100%);
+}
+
+.form-range::-webkit-slider-thumb {
+  width: 22px;
+  height: 22px;
+  margin-top: -7px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid #f59e0b;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.45);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-range::-webkit-slider-thumb:hover {
+  transform: scale(1.18);
+  box-shadow: 0 0 0 6px rgba(245, 158, 11, 0.25);
+}
+
+.form-range::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid #f59e0b;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.45);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Colorful Modal Enhancements */
+.modal-content {
+  border-radius: 16px !important;
+  overflow: hidden;
+  border: 1px solid rgba(226, 232, 240, 0.8) !important;
+  box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.3) !important;
+  background-color: #ffffff;
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #0b1120 0%, #1e293b 100%) !important;
+  color: #f8fafc !important;
+  border-bottom: 3px solid #f59e0b !important;
+  padding: 16px 22px !important;
+}
+
+.modal-title {
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+}
+
+.modal-header .btn-close {
+  filter: invert(1) brightness(200%);
+  opacity: 0.8;
+}
+
+.modal-header .btn-close:hover {
+  opacity: 1;
+}
+
+.modal-body {
+  background-color: #fafbfc;
+  padding: 22px !important;
+}
+
+.modal-footer {
+  background-color: #f1f5f9 !important;
+  border-top: 1px solid #e2e8f0 !important;
+  padding: 14px 22px !important;
+}
+
+/* Vibrant Form Cards */
+.form-card-vibrant {
+  background: #ffffff;
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  border-top: 4px solid #2563eb;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.1);
+  padding: 24px;
+}
+
+.form-card-solar {
+  background: #ffffff;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-top: 4px solid #f59e0b;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.1);
+  padding: 24px;
+}
+
+.form-card-emerald {
+  background: #ffffff;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-top: 4px solid #10b981;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.1);
+  padding: 24px;
+}
+
