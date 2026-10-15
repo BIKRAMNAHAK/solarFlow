@@ -5,6 +5,7 @@ import { getPanelsAction } from '../Services/Actions/getApis';
 import { createLeadAction } from '../Services/Actions/postApis';
 import { IMAGE_BASE_URL } from '../Services/helpers/config';
 import PriceCalculator from '../Services/helpers/PriceCalculator';
+import { Carousel } from 'react-bootstrap';
 import {
   FaSolarPanel,
   FaCalculator,
@@ -16,6 +17,12 @@ import {
   FaMapMarkerAlt,
   FaPhoneAlt,
   FaTools,
+  FaGift,
+  FaAward,
+  FaPercent,
+  FaIndustry,
+  FaSun,
+  FaCheckDouble,
 } from 'react-icons/fa';
 
 function HomePage() {
@@ -379,6 +386,327 @@ function HomePage() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ======================================================== */}
+      {/* 2. SOLAR ADVERTISEMENT & SPECIAL OFFERS AUTO CAROUSEL   */}
+      {/* ======================================================== */}
+      <section className="py-4 py-md-5 solar-ad-section bg-light">
+        <div className="container">
+          <div className="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-3">
+            <div>
+              <span className="badge badge-soft-warning px-3 py-1 rounded-pill mb-1 fw-bold" style={{ fontSize: '11px' }}>
+                <FaSun className="text-warning me-1" /> EXCLUSIVE PROMOTIONS & DEALS
+              </span>
+              <h3 className="fw-bold mb-0 text-dark" style={{ fontSize: '1.45rem' }}>
+                Featured Solar Offers & Subsidies
+              </h3>
+            </div>
+            <span className="text-muted small mt-1 mt-sm-0 d-flex align-items-center gap-1">
+              <span className="badge bg-success rounded-circle p-1 me-1"> </span>
+              Auto-sliding live promotions
+            </span>
+          </div>
+
+          <div className="solar-ad-carousel-wrapper">
+            <Carousel interval={3800} pause="hover" indicators={true} controls={true}>
+              {/* Slide 1: PM Surya Ghar Yojana - Central Subsidy */}
+              <Carousel.Item>
+                <div className="solar-ad-slide solar-ad-slide-1 text-white">
+                  <div className="row g-4 align-items-center w-100 position-relative" style={{ zIndex: 2 }}>
+                    <div className="col-lg-7">
+                      <div className="d-inline-flex align-items-center gap-2 bg-warning bg-opacity-20 border border-warning border-opacity-40 px-3 py-1 rounded-pill mb-3">
+                        <FaAward className="text-warning" size={13} />
+                        <span className="text-warning fw-bold small" style={{ fontSize: '11px', letterSpacing: '0.5px' }}>
+                          DIRECT CENTRAL GOVT SUBSIDY SCHEME 2026
+                        </span>
+                      </div>
+                      <h2 className="fw-extrabold text-white mb-2" style={{ fontSize: '1.65rem', lineHeight: '1.3' }}>
+                        Get Up to <span className="gradient-text-solar">₹78,000 Direct Subsidy</span> in Your Bank!
+                      </h2>
+                      <p className="text-light opacity-85 mb-3" style={{ fontSize: '0.9rem' }}>
+                        Under the <strong>PM Surya Ghar Muft Bijli Yojana</strong>, power your home with zero electric bills. Enjoy 300 free units/month with fast DISCOM net-metering and end-to-end subsidy liaison.
+                      </p>
+                      <div className="d-flex flex-wrap gap-2 mb-3">
+                        <span className="badge bg-white bg-opacity-10 border border-light border-opacity-25 px-2 py-1 text-light small">
+                          <FaCheckDouble className="text-warning me-1" /> 100% DBT Bank Transfer
+                        </span>
+                        <span className="badge bg-white bg-opacity-10 border border-light border-opacity-25 px-2 py-1 text-light small">
+                          <FaCheckDouble className="text-warning me-1" /> 300 Units/mo Free
+                        </span>
+                        <span className="badge bg-white bg-opacity-10 border border-light border-opacity-25 px-2 py-1 text-light small">
+                          <FaCheckDouble className="text-warning me-1" /> Tier-1 Topcon / Mono PERC
+                        </span>
+                      </div>
+                      <div className="d-flex flex-wrap gap-2">
+                        <Link to="/calculator" className="btn btn-solar-gradient btn-sm fw-bold px-3 py-2 rounded-pill d-inline-flex align-items-center gap-2">
+                          <FaCalculator /> Check My Subsidy Eligibility
+                        </Link>
+                        <a
+                          href={`https://wa.me/${cleanMobile}?text=${encodeURIComponent('Hello SolarFlow, I want to apply for PM Surya Ghar ₹78,000 Subsidy. Please guide me.')}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn btn-outline-light btn-sm fw-semibold px-3 py-2 rounded-pill d-inline-flex align-items-center gap-2"
+                        >
+                          <FaWhatsapp className="text-success" /> Enquire on WhatsApp
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="col-lg-5 text-center d-none d-lg-block">
+                      <div className="solar-ad-showcase-box text-start">
+                        <div className="d-flex align-items-center justify-content-between mb-3 border-bottom border-light border-opacity-20 pb-2">
+                          <div className="d-flex align-items-center gap-2">
+                            <div className="icon-box-amber">
+                              <FaSun size={20} />
+                            </div>
+                            <div>
+                              <h6 className="fw-bold mb-0 text-white">Govt DBT Subsidy Roster</h6>
+                              <small className="text-warning" style={{ fontSize: '11px' }}>Direct Bank Credit</small>
+                            </div>
+                          </div>
+                          <span className="badge bg-warning text-dark fw-bold rounded-pill">Active</span>
+                        </div>
+                        <div className="d-flex justify-content-between py-1 border-bottom border-secondary border-opacity-25 small text-light">
+                          <span>1 kW Rooftop:</span>
+                          <strong className="text-warning">₹30,000 Subsidy</strong>
+                        </div>
+                        <div className="d-flex justify-content-between py-1 border-bottom border-secondary border-opacity-25 small text-light">
+                          <span>2 kW Rooftop:</span>
+                          <strong className="text-warning">₹60,000 Subsidy</strong>
+                        </div>
+                        <div className="d-flex justify-content-between py-1 small text-light">
+                          <span>3 kW+ Rooftop:</span>
+                          <strong className="gradient-text-solar fw-bold">₹78,000 Max Subsidy</strong>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Carousel.Item>
+
+              {/* Slide 2: Commercial & Factory Mega Savings */}
+              <Carousel.Item>
+                <div className="solar-ad-slide solar-ad-slide-2 text-white">
+                  <div className="row g-4 align-items-center w-100 position-relative" style={{ zIndex: 2 }}>
+                    <div className="col-lg-7">
+                      <div className="d-inline-flex align-items-center gap-2 bg-primary bg-opacity-25 border border-primary border-opacity-40 px-3 py-1 rounded-pill mb-3">
+                        <FaIndustry className="text-info" size={13} />
+                        <span className="text-info fw-bold small" style={{ fontSize: '11px', letterSpacing: '0.5px' }}>
+                          COMMERCIAL & INDUSTRIAL POWER SLASH
+                        </span>
+                      </div>
+                      <h2 className="fw-extrabold text-white mb-2" style={{ fontSize: '1.65rem', lineHeight: '1.3' }}>
+                        Cut Factory Electricity Bills by <span className="gradient-text-blue">Up to 80%</span>!
+                      </h2>
+                      <p className="text-light opacity-85 mb-3" style={{ fontSize: '0.9rem' }}>
+                        Claim <strong>40% Accelerated Tax Depreciation</strong> in Year 1! High-yield 550W+ Bifacial solar arrays engineered for commercial sheds, schools, cold storages, and factories. Break even in just 3 to 4 years.
+                      </p>
+                      <div className="d-flex flex-wrap gap-2 mb-3">
+                        <span className="badge bg-white bg-opacity-10 border border-light border-opacity-25 px-2 py-1 text-light small">
+                          <FaPercent className="text-info me-1" /> 40% Tax Depreciation
+                        </span>
+                        <span className="badge bg-white bg-opacity-10 border border-light border-opacity-25 px-2 py-1 text-light small">
+                          <FaCheckDouble className="text-info me-1" /> 3-4 Year Fast ROI
+                        </span>
+                        <span className="badge bg-white bg-opacity-10 border border-light border-opacity-25 px-2 py-1 text-light small">
+                          <FaCheckDouble className="text-info me-1" /> High-Yield Bifacial Tech
+                        </span>
+                      </div>
+                      <div className="d-flex flex-wrap gap-2">
+                        <a
+                          href={`https://wa.me/${cleanMobile}?text=${encodeURIComponent('Hello SolarFlow, I am looking for a commercial solar setup for my factory/business. Please arrange a site audit.')}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn btn-primary btn-sm fw-bold px-3 py-2 rounded-pill d-inline-flex align-items-center gap-2"
+                        >
+                          <FaIndustry /> Request Commercial Solar Audit
+                        </a>
+                        <Link to="/panels" className="btn btn-outline-light btn-sm fw-semibold px-3 py-2 rounded-pill d-inline-flex align-items-center gap-2">
+                          <FaSolarPanel className="text-info" /> Explore High-Watt Panels
+                        </Link>
+                      </div>
+                    </div>
+
+                    <div className="col-lg-5 text-center d-none d-lg-block">
+                      <div className="solar-ad-showcase-box text-start">
+                        <div className="d-flex align-items-center justify-content-between mb-3 border-bottom border-light border-opacity-20 pb-2">
+                          <div className="d-flex align-items-center gap-2">
+                            <div className="icon-box-blue">
+                              <FaIndustry size={20} />
+                            </div>
+                            <div>
+                              <h6 className="fw-bold mb-0 text-white">Commercial ROI Ledger</h6>
+                              <small className="text-info" style={{ fontSize: '11px' }}>High Return on Investment</small>
+                            </div>
+                          </div>
+                          <span className="badge bg-info text-dark fw-bold rounded-pill">High ROI</span>
+                        </div>
+                        <div className="d-flex justify-content-between py-1 border-bottom border-secondary border-opacity-25 small text-light">
+                          <span>Year 1 Tax Depreciation:</span>
+                          <strong className="text-info">40% Write-off</strong>
+                        </div>
+                        <div className="d-flex justify-content-between py-1 border-bottom border-secondary border-opacity-25 small text-light">
+                          <span>Payback Period:</span>
+                          <strong className="text-info">3.2 - 3.8 Years</strong>
+                        </div>
+                        <div className="d-flex justify-content-between py-1 small text-light">
+                          <span>Free Power Thereafter:</span>
+                          <strong className="gradient-text-blue fw-bold">21+ Years Pure Savings</strong>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Carousel.Item>
+
+              {/* Slide 3: Cyclone-Grade GI Structures & 25-Year Warranty */}
+              <Carousel.Item>
+                <div className="solar-ad-slide solar-ad-slide-3 text-white">
+                  <div className="row g-4 align-items-center w-100 position-relative" style={{ zIndex: 2 }}>
+                    <div className="col-lg-7">
+                      <div className="d-inline-flex align-items-center gap-2 bg-success bg-opacity-25 border border-success border-opacity-40 px-3 py-1 rounded-pill mb-3">
+                        <FaShieldAlt className="text-success" size={13} />
+                        <span className="text-success fw-bold small" style={{ fontSize: '11px', letterSpacing: '0.5px' }}>
+                          CYCLONE RESISTANT GI ENGINEERING
+                        </span>
+                      </div>
+                      <h2 className="fw-extrabold text-white mb-2" style={{ fontSize: '1.65rem', lineHeight: '1.3' }}>
+                        Heavy-Duty Hot-Dip Galvanized Iron Framing
+                      </h2>
+                      <p className="text-light opacity-85 mb-3" style={{ fontSize: '0.9rem' }}>
+                        Tested to endure <strong>150 km/h cyclone wind loads</strong>. Elevated framing ensures your rooftop terrace remains 100% usable underneath for walking, gardening, and family gatherings.
+                      </p>
+                      <div className="d-flex flex-wrap gap-2 mb-3">
+                        <span className="badge bg-white bg-opacity-10 border border-light border-opacity-25 px-2 py-1 text-light small">
+                          <FaCheckDouble className="text-success me-1" /> 100% Roof Usability
+                        </span>
+                        <span className="badge bg-white bg-opacity-10 border border-light border-opacity-25 px-2 py-1 text-light small">
+                          <FaCheckDouble className="text-success me-1" /> 80µm Hot-Dip Rust Proofing
+                        </span>
+                        <span className="badge bg-white bg-opacity-10 border border-light border-opacity-25 px-2 py-1 text-light small">
+                          <FaCheckDouble className="text-success me-1" /> 25-Year Warranty
+                        </span>
+                      </div>
+                      <div className="d-flex flex-wrap gap-2">
+                        <Link to="/panels" className="btn btn-emerald-gradient btn-sm fw-bold px-3 py-2 rounded-pill d-inline-flex align-items-center gap-2">
+                          <FaSolarPanel /> Browse Hardware Catalog
+                        </Link>
+                        <Link to="/services" className="btn btn-outline-light btn-sm fw-semibold px-3 py-2 rounded-pill d-inline-flex align-items-center gap-2">
+                          <FaTools /> Structural Engineering Details
+                        </Link>
+                      </div>
+                    </div>
+
+                    <div className="col-lg-5 text-center d-none d-lg-block">
+                      <div className="solar-ad-showcase-box text-start">
+                        <div className="d-flex align-items-center justify-content-between mb-3 border-bottom border-light border-opacity-20 pb-2">
+                          <div className="d-flex align-items-center gap-2">
+                            <div className="icon-box-emerald">
+                              <FaShieldAlt size={20} />
+                            </div>
+                            <div>
+                              <h6 className="fw-bold mb-0 text-white">Structural Integrity Guarantee</h6>
+                              <small className="text-success" style={{ fontSize: '11px' }}>Engineering Certified</small>
+                            </div>
+                          </div>
+                          <span className="badge bg-success text-white fw-bold rounded-pill">Certified</span>
+                        </div>
+                        <div className="d-flex justify-content-between py-1 border-bottom border-secondary border-opacity-25 small text-light">
+                          <span>Wind Speed Tolerance:</span>
+                          <strong className="text-success">Up to 150 km/h</strong>
+                        </div>
+                        <div className="d-flex justify-content-between py-1 border-bottom border-secondary border-opacity-25 small text-light">
+                          <span>Zinc Galvanization:</span>
+                          <strong className="text-success">80 Microns Hot-Dip</strong>
+                        </div>
+                        <div className="d-flex justify-content-between py-1 small text-light">
+                          <span>Linear Power Warranty:</span>
+                          <strong className="gradient-text-emerald fw-bold">25 Years Guaranteed</strong>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Carousel.Item>
+
+              {/* Slide 4: Limited-Time Promotion - Free 3D Drone Shadow Survey */}
+              <Carousel.Item>
+                <div className="solar-ad-slide solar-ad-slide-4 text-white">
+                  <div className="row g-4 align-items-center w-100 position-relative" style={{ zIndex: 2 }}>
+                    <div className="col-lg-7">
+                      <div className="d-inline-flex align-items-center gap-2 bg-purple bg-opacity-25 border border-purple border-opacity-40 px-3 py-1 rounded-pill mb-3" style={{ background: 'rgba(168, 85, 247, 0.2)', borderColor: 'rgba(168, 85, 247, 0.4)' }}>
+                        <FaGift className="text-warning" size={13} />
+                        <span className="text-warning fw-bold small" style={{ fontSize: '11px', letterSpacing: '0.5px' }}>
+                          LIMITED TIME FESTIVE PROMOTION • WORTH ₹2,500 FREE
+                        </span>
+                      </div>
+                      <h2 className="fw-extrabold text-white mb-2" style={{ fontSize: '1.65rem', lineHeight: '1.3' }}>
+                        Free 3D Rooftop Shadow Analysis & Site Survey
+                      </h2>
+                      <p className="text-light opacity-85 mb-3" style={{ fontSize: '0.9rem' }}>
+                        Book your site inspection this week and receive a <strong>Complimentary 1-Year Preventive Maintenance AMC</strong> + customized 3D shadow trajectory mapping at zero consultation cost!
+                      </p>
+                      <div className="d-flex flex-wrap gap-2 mb-3">
+                        <span className="badge bg-white bg-opacity-10 border border-light border-opacity-25 px-2 py-1 text-light small">
+                          <FaCheckDouble className="text-warning me-1" /> 100% Free Site Visit
+                        </span>
+                        <span className="badge bg-white bg-opacity-10 border border-light border-opacity-25 px-2 py-1 text-light small">
+                          <FaCheckDouble className="text-warning me-1" /> 1-Year Free AMC Included
+                        </span>
+                        <span className="badge bg-white bg-opacity-10 border border-light border-opacity-25 px-2 py-1 text-light small">
+                          <FaCheckDouble className="text-warning me-1" /> 48-Hour Rapid Dispatch
+                        </span>
+                      </div>
+                      <div className="d-flex flex-wrap gap-2">
+                        <Link to="/services" className="btn btn-warning text-dark btn-sm fw-bold px-3 py-2 rounded-pill d-inline-flex align-items-center gap-2">
+                          <FaGift /> Claim Free Site Survey Now
+                        </Link>
+                        <a
+                          href={`https://wa.me/${cleanMobile}?text=${encodeURIComponent('Hello SolarFlow, I want to claim the Free Site Survey & 1-Year Free AMC offer. Please book an appointment.')}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn btn-outline-light btn-sm fw-semibold px-3 py-2 rounded-pill d-inline-flex align-items-center gap-2"
+                        >
+                          <FaWhatsapp className="text-success" /> Book on WhatsApp
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="col-lg-5 text-center d-none d-lg-block">
+                      <div className="solar-ad-showcase-box text-start">
+                        <div className="d-flex align-items-center justify-content-between mb-3 border-bottom border-light border-opacity-20 pb-2">
+                          <div className="d-flex align-items-center gap-2">
+                            <div className="icon-box-purple">
+                              <FaGift size={20} />
+                            </div>
+                            <div>
+                              <h6 className="fw-bold mb-0 text-white">Special Package Voucher</h6>
+                              <small className="text-warning" style={{ fontSize: '11px' }}>Complimentary Benefits</small>
+                            </div>
+                          </div>
+                          <span className="badge bg-warning text-dark fw-bold rounded-pill">FREE</span>
+                        </div>
+                        <div className="d-flex justify-content-between py-1 border-bottom border-secondary border-opacity-25 small text-light">
+                          <span>On-Site Shadow Audit:</span>
+                          <strong className="text-warning">₹0 (Was ₹2,500)</strong>
+                        </div>
+                        <div className="d-flex justify-content-between py-1 border-bottom border-secondary border-opacity-25 small text-light">
+                          <span>Annual AMC Plan:</span>
+                          <strong className="text-warning">1st Year FREE</strong>
+                        </div>
+                        <div className="d-flex justify-content-between py-1 small text-light">
+                          <span>Engineer Dispatch Time:</span>
+                          <strong className="gradient-text-sunset fw-bold">Within 48 Hours</strong>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Carousel.Item>
+            </Carousel>
           </div>
         </div>
       </section>
