@@ -152,16 +152,16 @@ function AdminTasksPage() {
   return (
     <AdminLayout>
       <div className="container-fluid px-0">
-        <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2 gap-md-3 mb-4 admin-header-row">
           <div>
-            <h3 className="fw-bold text-dark mb-1">Digital Job Assignment & Field Tracking</h3>
+            <h3 className="fw-bold text-dark mb-1" style={{ fontSize: '1.4rem' }}>Digital Job Assignment & Field Tracking</h3>
             <p className="text-muted small mb-0">
               Complete digital audit: which employee went where, when, what job they performed, and who authorized the dispatch.
             </p>
           </div>
           <button
             onClick={() => setShowAssignModal(true)}
-            className="btn btn-primary fw-bold rounded-pill d-flex align-items-center gap-2 shadow-sm mt-3 mt-md-0"
+            className="btn btn-primary fw-bold rounded-pill d-flex align-items-center gap-2 shadow-sm mt-2 mt-md-0 admin-header-btn flex-shrink-0"
           >
             <FaPlus /> Assign Work to Employee
           </button>
@@ -333,7 +333,7 @@ function AdminTasksPage() {
         {/* Modal 1: Assign Work to Employee */}
         {showAssignModal && (
           <div className="modal show fade d-block bg-dark bg-opacity-50" tabIndex="-1">
-            <div className="modal-dialog modal-dialog-centered modal-lg">
+            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
               <div className="modal-content rounded-4 border-0 shadow">
                 <div className="modal-header">
                   <h5 className="modal-title fw-bold">
@@ -484,7 +484,7 @@ function AdminTasksPage() {
         {/* Modal 2: Update Task Status / Completion Report */}
         {showStatusModal && selectedTask && (
           <div className="modal show fade d-block bg-dark bg-opacity-50" tabIndex="-1">
-            <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
               <div className="modal-content rounded-4 border-0 shadow">
                 <div className="modal-header">
                   <h5 className="modal-title fw-bold">Update Job Status & Field Report</h5>

@@ -166,9 +166,9 @@ function AdminAttendancePage() {
     <AdminLayout>
       <div className="container-fluid px-0">
         {/* Module Header */}
-        <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2 gap-md-3 mb-4 admin-header-row">
           <div>
-            <h3 className="fw-bold text-dark mb-1" style={{ fontSize: '1.6rem' }}>
+            <h3 className="fw-bold text-dark mb-1" style={{ fontSize: '1.4rem' }}>
               Staff Operations & Accounts Desk
             </h3>
             <p className="text-muted small mb-0">
@@ -177,10 +177,10 @@ function AdminAttendancePage() {
           </div>
 
           {/* Switcher Tab Pills */}
-          <div className="d-flex gap-2 mt-3 mt-md-0">
+          <div className="d-flex flex-column flex-sm-row gap-2 mt-2 mt-md-0 admin-tab-switcher w-100 w-md-auto">
             <button
               onClick={() => setActiveTab('attendance')}
-              className={`btn rounded-pill px-4 py-2 fw-semibold d-flex align-items-center gap-2 ${
+              className={`btn rounded-pill px-3 px-sm-4 py-2 fw-semibold d-flex align-items-center justify-content-center gap-2 ${
                 activeTab === 'attendance'
                   ? 'btn-success text-white shadow-sm'
                   : 'btn-outline-secondary'
@@ -191,7 +191,7 @@ function AdminAttendancePage() {
             </button>
             <button
               onClick={() => setActiveTab('tally')}
-              className={`btn rounded-pill px-4 py-2 fw-semibold d-flex align-items-center gap-2 ${
+              className={`btn rounded-pill px-3 px-sm-4 py-2 fw-semibold d-flex align-items-center justify-content-center gap-2 ${
                 activeTab === 'tally'
                   ? 'btn-dark text-white shadow-sm'
                   : 'btn-outline-secondary'
@@ -216,14 +216,14 @@ function AdminAttendancePage() {
           <div className="excel-container">
             {/* Excel Ribbon Topbar */}
             <div className="excel-ribbon">
-              <div className="d-flex align-items-center gap-3">
+              <div className="d-flex flex-wrap align-items-center gap-2 gap-sm-3 mb-2 mb-sm-0 w-100 w-md-auto">
                 <span className="fw-bold text-dark d-flex align-items-center gap-2">
                   <FaCalendarCheck className="text-success" /> Attendance Roster:
                 </span>
                 <input
                   type="date"
                   className="form-control form-control-sm border-secondary"
-                  style={{ width: '170px', fontWeight: '600' }}
+                  style={{ width: '160px', fontWeight: '600' }}
                   value={selectedDate}
                   onChange={(e) => handleDateChange(e.target.value)}
                 />
@@ -237,7 +237,7 @@ function AdminAttendancePage() {
               </div>
 
               {/* Real-time Summary Pills */}
-              <div className="d-flex align-items-center gap-2">
+              <div className="d-flex flex-wrap align-items-center gap-1 gap-sm-2">
                 <span className="badge cell-present px-3 py-2">
                   Present: {presentCount}
                 </span>
@@ -567,7 +567,7 @@ function AdminAttendancePage() {
         {/* Modal: New Tally Voucher Entry */}
         {showVoucherModal && (
           <div className="modal show fade d-block bg-dark bg-opacity-75" tabIndex="-1">
-            <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
               <div className="modal-content rounded-4 border-0 shadow">
                 <div className="modal-header bg-dark text-white">
                   <h5 className="modal-title fw-bold" style={{ fontSize: '1.1rem' }}>

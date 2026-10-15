@@ -80,24 +80,25 @@ function AdminLayout({ children }) {
   return (
     <div className="d-flex flex-column min-vh-100 bg-light">
       {/* Top Navbar */}
-      <nav className="navbar navbar-dark px-3 py-2 border-bottom sticky-top shadow-sm" style={{ background: '#0b1120', borderColor: '#1e293b' }}>
-        <div className="container-fluid d-flex justify-content-between align-items-center">
+      <nav className="navbar navbar-dark px-2 px-sm-3 py-2 border-bottom sticky-top shadow-sm" style={{ background: '#0b1120', borderColor: '#1e293b' }}>
+        <div className="container-fluid d-flex justify-content-between align-items-center px-1">
           {/* Brand & Mobile / Desktop Toggle */}
-          <div className="d-flex align-items-center gap-2">
+          <div className="d-flex align-items-center gap-1 gap-sm-2" style={{ minWidth: 0 }}>
             {/* Mobile Hamburger */}
             <button
               type="button"
-              className="btn btn-outline-secondary btn-sm d-md-none text-white p-1 rounded-3 me-1 d-flex align-items-center justify-content-center"
-              style={{ width: '34px', height: '34px' }}
+              className="btn btn-outline-secondary btn-sm d-md-none text-white p-1 rounded-3 me-1 d-flex align-items-center justify-content-center flex-shrink-0"
+              style={{ width: '32px', height: '32px' }}
               onClick={() => setShowMobileSidebar(true)}
+              aria-label="Open Navigation Menu"
             >
-              <FaBars size={16} />
+              <FaBars size={15} />
             </button>
 
             {/* Desktop Sidebar Collapse Toggle */}
             <button
               type="button"
-              className="btn btn-outline-secondary btn-sm d-none d-md-flex align-items-center justify-content-center text-white border-secondary rounded-3 me-2"
+              className="btn btn-outline-secondary btn-sm d-none d-md-flex align-items-center justify-content-center text-white border-secondary rounded-3 me-2 flex-shrink-0"
               style={{ width: '34px', height: '34px', background: 'rgba(255,255,255,0.05)' }}
               onClick={toggleSidebar}
               title={isSidebarCollapsed ? 'Open Sidebar (Show text)' : 'Close Sidebar (Icon only)'}
@@ -109,36 +110,37 @@ function AdminLayout({ children }) {
               <img
                 src={logoUrl}
                 alt="Logo"
-                style={{ width: '34px', height: '34px', objectFit: 'cover' }}
+                style={{ width: '32px', height: '32px', objectFit: 'cover' }}
                 className="rounded-3 border border-warning flex-shrink-0"
               />
             ) : (
               <div
                 className="bg-warning text-dark rounded-3 d-flex align-items-center justify-content-center flex-shrink-0"
-                style={{ width: '34px', height: '34px' }}
+                style={{ width: '32px', height: '32px' }}
               >
-                <FaSolarPanel size={18} />
+                <FaSolarPanel size={16} />
               </div>
             )}
-            <div>
-              <span className="fw-bold text-white mb-0 d-block" style={{ fontSize: '0.92rem', lineHeight: '1.2' }}>{companyName}</span>
-              <small className="text-secondary" style={{ fontSize: '10px' }}>Admin Workspace</small>
+            <div className="text-truncate" style={{ maxWidth: '140px' }}>
+              <span className="fw-bold text-white mb-0 d-block text-truncate" style={{ fontSize: '0.88rem', lineHeight: '1.2' }}>{companyName}</span>
+              <small className="text-secondary d-none d-sm-block" style={{ fontSize: '10px' }}>Admin Workspace</small>
             </div>
           </div>
 
           {/* Right Action buttons */}
-          <div className="d-flex align-items-center gap-2">
+          <div className="d-flex align-items-center gap-1 gap-sm-2 flex-shrink-0">
             <Link
               to="/"
               target="_blank"
-              className="btn btn-outline-light btn-sm rounded-pill d-flex align-items-center gap-1 px-3 py-1"
-              style={{ fontSize: '0.82rem' }}
+              className="btn btn-outline-light btn-sm rounded-pill d-flex align-items-center gap-1 px-2 px-sm-3 py-1"
+              style={{ fontSize: '0.8rem' }}
+              title="Customer Site"
             >
               <FaExternalLinkAlt size={10} className="flex-shrink-0" />
-              <span className="d-none d-sm-inline">Customer Site</span>
+              <span className="d-none d-sm-inline">Site</span>
             </Link>
 
-            <div className="d-flex align-items-center gap-2 ps-2 border-start border-secondary border-opacity-50">
+            <div className="d-flex align-items-center gap-1 gap-sm-2 ps-1 ps-sm-2 border-start border-secondary border-opacity-50">
               <div className="text-end d-none d-md-block">
                 <span className="d-block text-white fw-bold" style={{ fontSize: '0.88rem' }}>{ownerName}</span>
                 <span className="text-warning small" style={{ fontSize: '10px' }}>Owner</span>
@@ -146,10 +148,10 @@ function AdminLayout({ children }) {
               <button
                 onClick={handleLogout}
                 className="btn btn-outline-danger btn-sm rounded-pill d-flex align-items-center gap-1 px-2 py-1"
-                style={{ fontSize: '0.82rem' }}
+                style={{ fontSize: '0.8rem' }}
                 title="Logout"
               >
-                <FaSignOutAlt className="flex-shrink-0" />
+                <FaSignOutAlt size={12} className="flex-shrink-0" />
                 <span className="d-none d-sm-inline">Logout</span>
               </button>
             </div>

@@ -49,7 +49,7 @@ function AdminDashboardPage() {
     <AdminLayout>
       <div className="container-fluid px-0">
         {/* Header with Medium Font */}
-        <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3">
+        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2 gap-md-3 mb-3 admin-header-row">
           <div>
             <h4 className="fw-bold text-dark mb-1" style={{ fontSize: '1.35rem' }}>
               Solar Business Command Center
@@ -58,10 +58,10 @@ function AdminDashboardPage() {
               Live overview of solar inquiries, digital job assignments, employee dispatch, and hardware.
             </p>
           </div>
-          <div className="d-flex gap-2 mt-2 mt-md-0">
+          <div className="d-flex flex-wrap gap-2 mt-2 mt-md-0 w-100 w-md-auto">
             <Link
               to="/admin/tasks"
-              className="btn btn-primary btn-sm rounded-pill d-flex align-items-center gap-1 shadow-sm px-3"
+              className="btn btn-primary btn-sm rounded-pill d-flex align-items-center justify-content-center gap-1 shadow-sm px-3 flex-grow-1 flex-md-grow-0"
               style={{ fontSize: '0.84rem' }}
             >
               <FaTasks className="flex-shrink-0" />
@@ -69,7 +69,7 @@ function AdminDashboardPage() {
             </Link>
             <Link
               to="/admin/panels"
-              className="btn btn-warning text-dark btn-sm rounded-pill d-flex align-items-center gap-1 shadow-sm fw-bold px-3"
+              className="btn btn-warning text-dark btn-sm rounded-pill d-flex align-items-center justify-content-center gap-1 shadow-sm fw-bold px-3 flex-grow-1 flex-md-grow-0"
               style={{ fontSize: '0.84rem' }}
             >
               <FaPlus className="flex-shrink-0" />

@@ -160,16 +160,16 @@ function AdminPanelsPage() {
     <AdminLayout>
       <div className="container-fluid px-0">
         {/* Header */}
-        <div className="d-flex justify-content-between align-items-center mb-4">
+        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2 gap-md-3 mb-4 admin-header-row">
           <div>
-            <h3 className="fw-bold text-dark mb-1">Solar Panels & Pricing Control</h3>
+            <h3 className="fw-bold text-dark mb-1" style={{ fontSize: '1.4rem' }}>Solar Panels & Pricing Control</h3>
             <p className="text-muted small mb-0">
               Manage panel hardware models, specifications, pictures, base rates, and GST percentages.
             </p>
           </div>
           <button
             onClick={openAddModal}
-            className="btn btn-warning text-dark fw-bold rounded-pill d-flex align-items-center gap-2 shadow-sm"
+            className="btn btn-warning text-dark fw-bold rounded-pill d-flex align-items-center gap-2 shadow-sm admin-header-btn flex-shrink-0"
           >
             <FaPlus /> Add New Solar Panel
           </button>
@@ -295,7 +295,7 @@ function AdminPanelsPage() {
         {/* Add / Edit Modal */}
         {showModal && (
           <div className="modal show fade d-block bg-dark bg-opacity-50" tabIndex="-1">
-            <div className="modal-dialog modal-dialog-centered modal-lg">
+            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
               <div className="modal-content rounded-4 border-0 shadow">
                 <div className="modal-header">
                   <h5 className="modal-title fw-bold">

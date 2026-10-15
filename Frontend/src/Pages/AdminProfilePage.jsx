@@ -75,28 +75,28 @@ function AdminProfilePage() {
           </div>
         )}
 
-        <div className="form-card-vibrant p-4 p-md-5 mb-4">
+        <div className="form-card-vibrant p-3 p-sm-4 p-md-5 mb-4">
           <form onSubmit={handleUpdate}>
             {/* Current Logo preview */}
-            <div className="d-flex align-items-center gap-4 mb-4 pb-3 border-bottom">
-              <div>
+            <div className="d-flex flex-column flex-sm-row align-items-start align-items-sm-center gap-3 gap-sm-4 mb-4 pb-3 border-bottom">
+              <div className="flex-shrink-0">
                 {currentLogo ? (
                   <img
                     src={`${IMAGE_BASE_URL}${currentLogo}`}
                     alt="Logo"
-                    style={{ width: '80px', height: '80px', objectFit: 'cover' }}
+                    style={{ width: '70px', height: '70px', objectFit: 'cover' }}
                     className="rounded-3 border shadow-sm"
                   />
                 ) : (
                   <div
                     className="bg-light rounded-3 border d-flex align-items-center justify-content-center text-muted"
-                    style={{ width: '80px', height: '80px' }}
+                    style={{ width: '70px', height: '70px' }}
                   >
                     No Logo
                   </div>
                 )}
               </div>
-              <div>
+              <div className="flex-grow-1 w-100">
                 <label className="form-label small fw-bold d-flex align-items-center gap-1">
                   <FaImage className="text-primary" /> Update Company Logo
                 </label>
@@ -173,7 +173,7 @@ function AdminProfilePage() {
                 <button
                   type="submit"
                   disabled={isSaving}
-                  className="btn btn-solar-gradient fw-bold px-4 py-2 rounded-pill shadow-sm"
+                  className="btn btn-solar-gradient fw-bold px-4 py-2 rounded-pill shadow-sm w-100 w-sm-auto"
                 >
                   {isSaving ? 'Updating Profile...' : 'Save Profile Settings'}
                 </button>

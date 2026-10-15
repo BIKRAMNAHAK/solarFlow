@@ -110,17 +110,17 @@ function AdminLeadsPage() {
   return (
     <AdminLayout>
       <div className="container-fluid px-0">
-        <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2 gap-md-3 mb-4 admin-header-row">
           <div>
-            <h3 className="fw-bold text-dark mb-1">Customer Leads & Inquiries</h3>
+            <h3 className="fw-bold text-dark mb-1" style={{ fontSize: '1.4rem' }}>Customer Leads & Inquiries</h3>
             <p className="text-muted small mb-0">
               Manage incoming rooftop solar inquiries from website & WhatsApp. Assign field staff digitally for site surveys.
             </p>
           </div>
-          <div className="d-flex align-items-center gap-2 mt-3 mt-md-0">
-            <FaFilter className="text-muted" />
+          <div className="d-flex align-items-center gap-2 mt-2 mt-md-0 w-100 w-md-auto">
+            <FaFilter className="text-muted flex-shrink-0" />
             <select
-              className="form-select form-select-sm rounded-pill"
+              className="form-select form-select-sm rounded-pill w-100 w-md-auto"
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
             >
@@ -277,7 +277,7 @@ function AdminLeadsPage() {
         {/* Modal: Assign Field Job to Employee Digitally */}
         {assignModal && selectedLead && (
           <div className="modal show fade d-block bg-dark bg-opacity-50" tabIndex="-1">
-            <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
               <div className="modal-content rounded-4 border-0 shadow">
                 <div className="modal-header">
                   <h5 className="modal-title fw-bold">
@@ -286,7 +286,7 @@ function AdminLeadsPage() {
                   <button type="button" className="btn-close" onClick={() => setAssignModal(false)}></button>
                 </div>
                 <form onSubmit={handleAssignSubmit}>
-                  <div className="modal-body p-4">
+                  <div className="modal-body p-3 p-sm-4">
                     <div className="p-3 bg-light rounded-3 mb-3 small">
                       <strong>Customer:</strong> {selectedLead.customerName} ({selectedLead.customerPhone})<br />
                       <strong>Location:</strong> {selectedLead.city || selectedLead.address || 'Not specified'}
@@ -310,7 +310,7 @@ function AdminLeadsPage() {
                     </div>
 
                     <div className="row g-2 mb-3">
-                      <div className="col-6">
+                      <div className="col-12 col-sm-6">
                         <label className="form-label small fw-bold">Job Type</label>
                         <select
                           className="form-select"
@@ -323,7 +323,7 @@ function AdminLeadsPage() {
                           <option value="Maintenance">Routine Maintenance</option>
                         </select>
                       </div>
-                      <div className="col-6">
+                      <div className="col-12 col-sm-6">
                         <label className="form-label small fw-bold">Scheduled Date</label>
                         <input
                           type="date"

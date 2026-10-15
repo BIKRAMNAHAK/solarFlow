@@ -154,16 +154,16 @@ function AdminQuotationsPage() {
   return (
     <AdminLayout>
       <div className="container-fluid px-0">
-        <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2 gap-md-3 mb-4 admin-header-row">
           <div>
-            <h3 className="fw-bold text-dark mb-1">Solar Project Quotations</h3>
+            <h3 className="fw-bold text-dark mb-1" style={{ fontSize: '1.4rem' }}>Solar Project Quotations</h3>
             <p className="text-muted small mb-0">
               Submit formal turnkey solar quotations customized to customer site requirements with 1-click WhatsApp proposal sharing.
             </p>
           </div>
           <button
             onClick={() => setShowCreateModal(true)}
-            className="btn btn-warning text-dark fw-bold rounded-pill d-flex align-items-center gap-2 shadow-sm mt-3 mt-md-0"
+            className="btn btn-warning text-dark fw-bold rounded-pill d-flex align-items-center gap-2 shadow-sm mt-2 mt-md-0 admin-header-btn flex-shrink-0"
           >
             <FaPlus /> Create Custom Quotation
           </button>
@@ -306,7 +306,7 @@ For confirmation or site visit, reply to this message.`;
         {/* Create Quotation Modal */}
         {showCreateModal && (
           <div className="modal show fade d-block bg-dark bg-opacity-50" tabIndex="-1">
-            <div className="modal-dialog modal-dialog-centered modal-lg">
+            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
               <div className="modal-content rounded-4 border-0 shadow">
                 <div className="modal-header">
                   <h5 className="modal-title fw-bold">
@@ -506,14 +506,14 @@ For confirmation or site visit, reply to this message.`;
         {/* View / Print Quotation Proposal Modal */}
         {viewQuotation && (
           <div className="modal show fade d-block bg-dark bg-opacity-75" tabIndex="-1">
-            <div className="modal-dialog modal-dialog-centered modal-lg">
-              <div className="modal-content rounded-4 border-0 p-4">
-                <div className="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
+            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+              <div className="modal-content rounded-4 border-0 p-3 p-sm-4">
+                <div className="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center border-bottom pb-3 mb-3 gap-2">
                   <div>
                     <h4 className="fw-bold mb-0 text-primary">{companyName}</h4>
                     <small className="text-muted">Solar EPC & Turnkey Engineering Solutions | +91 {adminPhone}</small>
                   </div>
-                  <div className="text-end">
+                  <div className="text-sm-end">
                     <span className="badge bg-dark fs-6">{viewQuotation.quotationNumber}</span>
                     <small className="text-muted d-block">{new Date(viewQuotation.createdAt).toLocaleDateString()}</small>
                   </div>

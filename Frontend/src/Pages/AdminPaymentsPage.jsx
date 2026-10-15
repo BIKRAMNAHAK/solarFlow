@@ -83,16 +83,16 @@ function AdminPaymentsPage() {
   return (
     <AdminLayout>
       <div className="container-fluid px-0">
-        <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2 gap-md-3 mb-4 admin-header-row">
           <div>
-            <h3 className="fw-bold text-dark mb-1">Customer Payments & Milestone Tracking</h3>
+            <h3 className="fw-bold text-dark mb-1" style={{ fontSize: '1.4rem' }}>Customer Payments & Milestone Tracking</h3>
             <p className="text-muted small mb-0">
               Manage advance booking tokens, delivery milestone payments, outstanding balances, and transaction receipts.
             </p>
           </div>
           <button
             onClick={() => setShowModal(true)}
-            className="btn btn-success fw-bold rounded-pill d-flex align-items-center gap-2 shadow-sm mt-3 mt-md-0"
+            className="btn btn-success fw-bold rounded-pill d-flex align-items-center gap-2 shadow-sm mt-2 mt-md-0 admin-header-btn flex-shrink-0"
           >
             <FaPlus /> Record Customer Payment
           </button>
@@ -223,7 +223,7 @@ function AdminPaymentsPage() {
         {/* Add Payment Modal */}
         {showModal && (
           <div className="modal show fade d-block bg-dark bg-opacity-50" tabIndex="-1">
-            <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
               <div className="modal-content rounded-4 border-0 shadow">
                 <div className="modal-header">
                   <h5 className="modal-title fw-bold">
