@@ -5,6 +5,7 @@ import AdminLayout from '../Components/AdminLayout';
 import { getQuotationsAction, getPanelsAction } from '../Services/Actions/getApis';
 import { createQuotationAction, updateQuotationAction, deleteQuotationAction } from '../Services/Actions/postApis';
 import PriceCalculator from '../Services/helpers/PriceCalculator';
+import { IMAGE_BASE_URL } from '../Services/helpers/config';
 import {
   FaFileInvoiceDollar,
   FaPlus,
@@ -14,6 +15,18 @@ import {
   FaCheckCircle,
   FaSolarPanel,
   FaRupeeSign,
+  FaShieldAlt,
+  FaBolt,
+  FaSun,
+  FaCertificate,
+  FaCheckDouble,
+  FaBuilding,
+  FaUser,
+  FaPhoneAlt,
+  FaMapMarkerAlt,
+  FaDownload,
+  FaTimes,
+  FaAward,
 } from 'react-icons/fa';
 
 function AdminQuotationsPage() {
@@ -149,7 +162,40 @@ function AdminQuotationsPage() {
   };
 
   const companyName = adminProfile?.companyName || admin?.companyName || 'SolarFlow';
-  const adminPhone = adminProfile?.mobile || admin?.mobile || '9876543210';
+  const adminPhone = adminProfile?.mobile || admin?.mobile || '7803816900';
+  const adminEmail = adminProfile?.email || admin?.email || 'admin@solarflow.com';
+  const ownerName = adminProfile?.ownerName || admin?.ownerName || 'Admin';
+  const logoUrl = adminProfile?.logo ? `${IMAGE_BASE_URL}${adminProfile.logo}` : null;
+
+  const shareQuotationOnWhatsApp = (q) => {
+    const phone = q.customerPhone?.replace(/\D/g, '');
+    const cleanPhone = phone?.length === 10 ? `91${phone}` : phone;
+    const subsidy = q.systemCapacityKw >= 3 ? 78000 : q.systemCapacityKw >= 2 ? 60000 : 30000;
+    const netCost = Math.max(0, (q.grandTotal || 0) - subsidy);
+    const message = `*OFFICIAL SOLAR TURNKEY QUOTATION*\n` +
+      `*${companyName.toUpperCase()}*\n` +
+      `------------------------------------------\n` +
+      `📄 *Quotation No:* ${q.quotationNumber}\n` +
+      `👤 *Customer Name:* ${q.customerName}\n` +
+      `📞 *Phone:* ${q.customerPhone}\n` +
+      `📍 *Site Location:* ${q.customerAddress || 'Customer Site'}\n` +
+      `------------------------------------------\n` +
+      `⚡ *System Capacity:* ${q.systemCapacityKw} kW Rooftop Solar Plant\n` +
+      `☀️ *Solar Modules:* ${q.totalPanels} Units x ${q.panelWattage}W (${q.panelName || 'Tier-1 Mono PERC'})\n` +
+      `🔌 *Inverter:* ${q.inverterDetails}\n` +
+      `🏗️ *Mounting:* ${q.structureDetails}\n` +
+      `📊 *Est. Generation:* ~${Math.round(q.systemCapacityKw * 120)} Units / Month\n` +
+      `------------------------------------------\n` +
+      `💰 *Total Project Cost (Inc. GST):* Rs. ${q.grandTotal?.toLocaleString('en-IN')}/-\n` +
+      `🎁 *PM Surya Ghar Govt Subsidy:* -Rs. ${subsidy.toLocaleString('en-IN')}/- (Direct DBT)\n` +
+      `✨ *Estimated Net Outlay:* Rs. ${netCost.toLocaleString('en-IN')}/- only\n` +
+      `------------------------------------------\n` +
+      `🛡️ *Warranties:* 25-Year Performance Warranty | 5-Year Inverter Warranty\n` +
+      `⚡ *Net-Metering:* Full DISCOM liaison included\n\n` +
+      `For any questions or site confirmation, contact +91 ${adminPhone}.`;
+
+    window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`, '_blank');
+  };
 
   return (
     <AdminLayout>
@@ -506,85 +552,345 @@ For confirmation or site visit, reply to this message.`;
         {/* View / Print Quotation Proposal Modal */}
         {viewQuotation && (
           <div className="modal show fade d-block bg-dark bg-opacity-75" tabIndex="-1">
-            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-              <div className="modal-content rounded-4 border-0 p-3 p-sm-4">
-                <div className="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center border-bottom pb-3 mb-3 gap-2">
-                  <div>
-                    <h4 className="fw-bold mb-0 text-primary">{companyName}</h4>
-                    <small className="text-muted">Solar EPC & Turnkey Engineering Solutions | +91 {adminPhone}</small>
+            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+              <div className="modal-content rounded-4 border-0 p-0 overflow-hidden shadow-lg">
+                {/* Modal Top Control Bar (Hidden on print) */}
+                <div className="no-print bg-dark text-white px-3 py-2 d-flex flex-wrap justify-content-between align-items-center gap-2 border-bottom border-secondary border-opacity-50">
+                  <div className="d-flex align-items-center gap-2">
+                    <span className="badge bg-warning text-dark fw-bold">PROPOSAL PREVIEW</span>
+                    <span className="small text-light">Quote #{viewQuotation.quotationNumber}</span>
                   </div>
-                  <div className="text-sm-end">
-                    <span className="badge bg-dark fs-6">{viewQuotation.quotationNumber}</span>
-                    <small className="text-muted d-block">{new Date(viewQuotation.createdAt).toLocaleDateString()}</small>
+                  <div className="d-flex align-items-center gap-2">
+                    <button
+                      onClick={() => window.print()}
+                      className="btn btn-warning btn-sm fw-bold rounded-pill d-flex align-items-center gap-1 shadow-sm px-3"
+                    >
+                      <FaPrint size={13} /> Print / Save PDF
+                    </button>
+                    <button
+                      onClick={() => shareQuotationOnWhatsApp(viewQuotation)}
+                      className="btn btn-success btn-sm fw-bold rounded-pill d-flex align-items-center gap-1 shadow-sm px-3"
+                    >
+                      <FaWhatsapp size={14} /> Send on WhatsApp
+                    </button>
+                    <button
+                      onClick={() => setViewQuotation(null)}
+                      className="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center p-0 text-white"
+                      style={{ width: '28px', height: '28px' }}
+                      title="Close Preview"
+                    >
+                      <FaTimes size={13} />
+                    </button>
                   </div>
                 </div>
 
-                <div className="bg-light p-3 rounded-3 mb-3 small">
-                  <strong>Prepared For:</strong> {viewQuotation.customerName}<br />
-                  <strong>Phone:</strong> {viewQuotation.customerPhone}<br />
-                  <strong>Site Address:</strong> {viewQuotation.customerAddress || 'Customer Rooftop'}
+                {/* Printable High-Resolution Colorful Document */}
+                <div className="quotation-printable-document p-3 p-md-4">
+                  {/* Top Colorful Header Banner */}
+                  <div className="quotation-header-banner rounded-4 mb-3 mb-md-4">
+                    <div className="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-3">
+                      <div className="d-flex align-items-center gap-3">
+                        {logoUrl ? (
+                          <img
+                            src={logoUrl}
+                            alt="Logo"
+                            style={{ width: '56px', height: '56px', objectFit: 'cover' }}
+                            className="rounded-3 border border-warning flex-shrink-0 bg-white p-1"
+                          />
+                        ) : (
+                          <div
+                            className="bg-warning text-dark rounded-3 d-flex align-items-center justify-content-center flex-shrink-0"
+                            style={{ width: '56px', height: '56px' }}
+                          >
+                            <FaSolarPanel size={28} />
+                          </div>
+                        )}
+                        <div>
+                          <h4 className="fw-extrabold mb-0 text-white" style={{ fontSize: '1.4rem', letterSpacing: '-0.3px' }}>
+                            {companyName}
+                          </h4>
+                          <span className="text-warning small fw-bold d-block" style={{ fontSize: '11px', letterSpacing: '0.5px' }}>
+                            TURNKEY SOLAR EPC & CLEAN ENERGY ENGINEERING
+                          </span>
+                          <small className="text-light opacity-75 d-block" style={{ fontSize: '11px' }}>
+                            📞 +91 {adminPhone} &nbsp;|&nbsp; ✉ {adminEmail}
+                          </small>
+                        </div>
+                      </div>
+
+                      <div className="text-start text-sm-end">
+                        <div className="badge bg-warning text-dark fs-6 fw-bold px-3 py-1 rounded-pill mb-1 shadow-sm">
+                          {viewQuotation.quotationNumber}
+                        </div>
+                        <div className="small text-light">
+                          <strong>Date:</strong> {new Date(viewQuotation.createdAt || Date.now()).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}
+                        </div>
+                        <div className="small text-warning" style={{ fontSize: '11px' }}>
+                          <strong>Valid Till:</strong> 30 Days from Issue
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 4 Multi-Color Technical Spec Pills */}
+                  <div className="row g-2 g-md-3 mb-3 mb-md-4">
+                    <div className="col-6 col-md-3">
+                      <div className="quotation-spec-pill border-start border-primary border-4 h-100">
+                        <small className="text-muted d-block" style={{ fontSize: '11px' }}>System Capacity</small>
+                        <strong className="text-primary fs-6">{viewQuotation.systemCapacityKw} kW Plant</strong>
+                      </div>
+                    </div>
+                    <div className="col-6 col-md-3">
+                      <div className="quotation-spec-pill border-start border-warning border-4 h-100">
+                        <small className="text-muted d-block" style={{ fontSize: '11px' }}>Modules & Wattage</small>
+                        <strong className="text-dark fs-6">{viewQuotation.totalPanels} x {viewQuotation.panelWattage}W</strong>
+                      </div>
+                    </div>
+                    <div className="col-6 col-md-3">
+                      <div className="quotation-spec-pill border-start border-success border-4 h-100">
+                        <small className="text-muted d-block" style={{ fontSize: '11px' }}>Est. Monthly Units</small>
+                        <strong className="text-success fs-6">~{Math.round(viewQuotation.systemCapacityKw * 120)} kWh/mo</strong>
+                      </div>
+                    </div>
+                    <div className="col-6 col-md-3">
+                      <div className="quotation-spec-pill border-start border-info border-4 h-100">
+                        <small className="text-muted d-block" style={{ fontSize: '11px' }}>Performance Warranty</small>
+                        <strong className="text-info fs-6">25 Years Linear</strong>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Client & Contractor Information Grid */}
+                  <div className="row g-3 mb-3 mb-md-4">
+                    <div className="col-md-6">
+                      <div className="p-3 rounded-3 h-100" style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderTop: '3px solid #2563eb' }}>
+                        <div className="d-flex align-items-center gap-2 mb-2">
+                          <FaUser className="text-primary" size={14} />
+                          <strong className="text-dark small text-uppercase fw-bold">Client / Site Details</strong>
+                        </div>
+                        <div className="small">
+                          <div className="fw-bold text-dark fs-6 mb-1">{viewQuotation.customerName}</div>
+                          <div className="text-muted mb-1">📞 +91 {viewQuotation.customerPhone}</div>
+                          <div className="text-muted">📍 {viewQuotation.customerAddress || 'Installation Site Rooftop'}</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="col-md-6">
+                      <div className="p-3 rounded-3 h-100" style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderTop: '3px solid #10b981' }}>
+                        <div className="d-flex align-items-center gap-2 mb-2">
+                          <FaBuilding className="text-success" size={14} />
+                          <strong className="text-dark small text-uppercase fw-bold">Solar EPC Contractor</strong>
+                        </div>
+                        <div className="small">
+                          <div className="fw-bold text-dark fs-6 mb-1">{companyName}</div>
+                          <div className="text-muted mb-1">Authorized Owner: {ownerName}</div>
+                          <div className="text-muted">Certified MNRE / DISCOM Solar Engineering Partner</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bill of Materials (BOM) Detailed Cost Breakdown Table */}
+                  <div className="mb-3 mb-md-4">
+                    <h6 className="fw-bold text-dark mb-2 d-flex align-items-center gap-2" style={{ fontSize: '0.98rem' }}>
+                      <FaFileInvoiceDollar className="text-warning" /> Itemized Bill of Materials & Turnkey EPC Scope
+                    </h6>
+                    <div className="table-responsive rounded-3 border">
+                      <table className="quotation-table table table-hover mb-0">
+                        <thead>
+                          <tr>
+                            <th style={{ width: '55%' }}>System Component & Technical Specification</th>
+                            <th className="text-center" style={{ width: '20%' }}>Quantity / BOS</th>
+                            <th className="text-end" style={{ width: '25%' }}>Amount (₹)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <strong className="text-dark d-block">1. Solar Photovoltaic Modules</strong>
+                              <small className="text-muted">
+                                {viewQuotation.panelName || 'Tier-1 Mono PERC'} ({viewQuotation.panelWattage}W Half-Cut Cell Technology with 25-Yr Linear Power Warranty)
+                              </small>
+                            </td>
+                            <td className="text-center">
+                              <span className="badge bg-light text-dark border fw-bold">{viewQuotation.totalPanels} Units</span>
+                            </td>
+                            <td className="text-end fw-bold text-dark">
+                              ₹{viewQuotation.panelCost?.toLocaleString('en-IN')}
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <strong className="text-dark d-block">2. Power Inverter & Telemetry System</strong>
+                              <small className="text-muted">
+                                {viewQuotation.inverterDetails || 'High-Efficiency Grid-Tie Inverter with WiFi generation monitoring & dual MPPT'}
+                              </small>
+                            </td>
+                            <td className="text-center">
+                              <span className="badge bg-light text-dark border fw-bold">1 Complete Set</span>
+                            </td>
+                            <td className="text-end fw-bold text-dark">
+                              ₹{viewQuotation.inverterCost?.toLocaleString('en-IN')}
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <strong className="text-dark d-block">3. Mounting Framework & Structure</strong>
+                              <small className="text-muted">
+                                {viewQuotation.structureDetails || 'Elevated Hot-Dip Galvanized Iron (GI 80µm) engineered for 150 km/h cyclone resistance'}
+                              </small>
+                            </td>
+                            <td className="text-center">
+                              <span className="badge bg-light text-dark border fw-bold">Turnkey Array</span>
+                            </td>
+                            <td className="text-end fw-bold text-dark">
+                              ₹{viewQuotation.structureCost?.toLocaleString('en-IN')}
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <strong className="text-dark d-block">4. Balance of System, Cabling & Installation</strong>
+                              <small className="text-muted">
+                                Solar grade 4sqmm DC cables, AC/DC DB boxes, chemical earthing kits, lightning arrestor & certified mechanical installation
+                              </small>
+                            </td>
+                            <td className="text-center">
+                              <span className="badge bg-light text-dark border fw-bold">Lump Sum Scope</span>
+                            </td>
+                            <td className="text-end fw-bold text-dark">
+                              ₹{viewQuotation.installationCost?.toLocaleString('en-IN')}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  {/* Pricing Breakdown & Grand Total Card */}
+                  <div className="row g-3 mb-3 mb-md-4">
+                    {/* Left: Government Subsidy & Environmental Benefit Box */}
+                    <div className="col-md-6">
+                      <div className="quotation-subsidy-card h-100">
+                        <div className="d-flex align-items-center gap-2 mb-2">
+                          <FaAward className="text-success" size={18} />
+                          <strong className="text-success text-uppercase small fw-bold">
+                            PM Surya Ghar Subsidy Benefit
+                          </strong>
+                        </div>
+                        <p className="text-muted small mb-2">
+                          Eligible rooftop capacity ({viewQuotation.systemCapacityKw} kW) qualifies for direct government DBT transfer into customer's bank account.
+                        </p>
+                        <div className="d-flex justify-content-between align-items-center py-1 border-bottom border-success border-opacity-25 small">
+                          <span>Central Govt Subsidy:</span>
+                          <strong className="text-success fs-6">
+                            -₹{(viewQuotation.systemCapacityKw >= 3 ? 78000 : viewQuotation.systemCapacityKw >= 2 ? 60000 : 30000).toLocaleString('en-IN')} (Direct DBT)
+                          </strong>
+                        </div>
+                        <div className="d-flex justify-content-between align-items-center pt-2">
+                          <span className="fw-bold small text-dark">Estimated Net Effective Outlay:</span>
+                          <strong className="text-dark fs-6 fw-extrabold">
+                            ₹{Math.max(0, viewQuotation.grandTotal - (viewQuotation.systemCapacityKw >= 3 ? 78000 : viewQuotation.systemCapacityKw >= 2 ? 60000 : 30000)).toLocaleString('en-IN')}*
+                          </strong>
+                        </div>
+                        <small className="text-muted d-block mt-1" style={{ fontSize: '10px' }}>
+                          *Disbursed directly by Ministry of New & Renewable Energy upon DISCOM commissioning.
+                        </small>
+                      </div>
+                    </div>
+
+                    {/* Right: Financial Totals */}
+                    <div className="col-md-6">
+                      <div className="p-3 rounded-3" style={{ background: '#f8fafc', border: '1px solid #e2e8f0' }}>
+                        <div className="d-flex justify-content-between py-1 small text-muted">
+                          <span>Gross Material & Labor Subtotal:</span>
+                          <strong className="text-dark">
+                            ₹{((viewQuotation.panelCost || 0) + (viewQuotation.inverterCost || 0) + (viewQuotation.structureCost || 0) + (viewQuotation.installationCost || 0)).toLocaleString('en-IN')}
+                          </strong>
+                        </div>
+
+                        {viewQuotation.discount > 0 && (
+                          <div className="d-flex justify-content-between py-1 small text-danger">
+                            <span>Special Project Discount:</span>
+                            <strong>-₹{viewQuotation.discount?.toLocaleString('en-IN')}</strong>
+                          </div>
+                        )}
+
+                        <div className="d-flex justify-content-between py-1 small text-muted border-bottom pb-2">
+                          <span>Statutory GST ({viewQuotation.gstPercent}%):</span>
+                          <strong className="text-dark">
+                            +₹{Math.round(viewQuotation.gstAmount || 0).toLocaleString('en-IN')}
+                          </strong>
+                        </div>
+
+                        <div className="quotation-grand-total-box d-flex justify-content-between align-items-center mt-3">
+                          <div>
+                            <span className="text-uppercase fw-bold text-dark d-block small" style={{ fontSize: '11px', letterSpacing: '0.5px' }}>
+                              Grand Total (Turnkey EPC Value)
+                            </span>
+                            <small className="text-muted" style={{ fontSize: '11px' }}>Inclusive of GST, freight & commissioning</small>
+                          </div>
+                          <div className="text-end">
+                            <h3 className="fw-extrabold mb-0 text-dark gradient-text-solar" style={{ fontSize: '1.65rem' }}>
+                              ₹{viewQuotation.grandTotal?.toLocaleString('en-IN')}
+                            </h3>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Notes, Terms & Authorization Footer */}
+                  <div className="p-3 bg-light rounded-3 mb-2 border">
+                    <div className="row g-3">
+                      <div className="col-md-8">
+                        <strong className="text-dark small d-block mb-1">Standard Terms & Engineering Commitments:</strong>
+                        <ul className="text-muted small mb-0 ps-3" style={{ fontSize: '11px' }}>
+                          <li><strong>Performance Warranty:</strong> 25 Years linear degradation guarantee on photovoltaic modules.</li>
+                          <li><strong>Inverter Guarantee:</strong> 5 Years full replacement warranty from original equipment manufacturer.</li>
+                          <li><strong>Liaison Support:</strong> Full DISCOM documentation, application submission & net-meter coordination.</li>
+                          {viewQuotation.notes && <li><strong>Special Remarks:</strong> {viewQuotation.notes}</li>}
+                        </ul>
+                      </div>
+                      <div className="col-md-4 text-start text-md-end d-flex flex-column justify-content-end">
+                        <div className="pt-2 border-top border-secondary border-opacity-25 mt-auto">
+                          <span className="fw-bold text-dark d-block small">{ownerName}</span>
+                          <small className="text-muted d-block" style={{ fontSize: '11px' }}>Authorized Engineering Signatory</small>
+                          <small className="text-success fw-semibold" style={{ fontSize: '10px' }}>✓ Digitally Verified Proposal</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <h6 className="fw-bold mb-2">System Sizing: {viewQuotation.systemCapacityKw} kW Plant</h6>
-                <table className="table table-bordered small mb-3">
-                  <thead className="table-light">
-                    <tr>
-                      <th>Description</th>
-                      <th>Quantity</th>
-                      <th className="text-end">Amount (₹)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{viewQuotation.panelName || 'Tier-1 Solar Panels'} ({viewQuotation.panelWattage}W)</td>
-                      <td>{viewQuotation.totalPanels} Units</td>
-                      <td className="text-end">₹{viewQuotation.panelCost?.toLocaleString('en-IN')}</td>
-                    </tr>
-                    <tr>
-                      <td>Inverter: {viewQuotation.inverterDetails}</td>
-                      <td>1 Set</td>
-                      <td className="text-end">₹{viewQuotation.inverterCost?.toLocaleString('en-IN')}</td>
-                    </tr>
-                    <tr>
-                      <td>Structure: {viewQuotation.structureDetails}</td>
-                      <td>Turnkey BOS</td>
-                      <td className="text-end">₹{viewQuotation.structureCost?.toLocaleString('en-IN')}</td>
-                    </tr>
-                    <tr>
-                      <td>Civil Foundation, DC/AC Cabling, Installation</td>
-                      <td>Lump sum</td>
-                      <td className="text-end">₹{viewQuotation.installationCost?.toLocaleString('en-IN')}</td>
-                    </tr>
-                    <tr>
-                      <td colSpan="2" className="text-end fw-bold">Discount:</td>
-                      <td className="text-end text-danger">-₹{viewQuotation.discount?.toLocaleString('en-IN')}</td>
-                    </tr>
-                    <tr>
-                      <td colSpan="2" className="text-end fw-bold">GST ({viewQuotation.gstPercent}%):</td>
-                      <td className="text-end">₹{Math.round(viewQuotation.gstAmount)?.toLocaleString('en-IN')}</td>
-                    </tr>
-                    <tr className="table-success">
-                      <td colSpan="2" className="text-end fw-bold fs-6">Grand Total:</td>
-                      <td className="text-end fw-bold fs-6 text-success">
-                        ₹{viewQuotation.grandTotal?.toLocaleString('en-IN')}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                {viewQuotation.notes && (
-                  <p className="text-muted small mb-3">
-                    <strong>Scope & Terms:</strong> {viewQuotation.notes}
-                  </p>
-                )}
-
-                <div className="d-flex justify-content-end gap-2">
-                  <button onClick={() => window.print()} className="btn btn-outline-dark rounded-pill btn-sm d-flex align-items-center gap-1">
-                    <FaPrint /> Print / Save PDF
-                  </button>
-                  <button onClick={() => setViewQuotation(null)} className="btn btn-secondary rounded-pill btn-sm">
-                    Close
-                  </button>
+                {/* Bottom Action Footer (Hidden on print) */}
+                <div className="no-print p-3 bg-light border-top d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+                  <small className="text-muted">
+                    💡 Tip: Click <strong>"Print / Save PDF"</strong> and select <strong>"Save as PDF"</strong> in your print dialog.
+                  </small>
+                  <div className="d-flex flex-wrap gap-2 w-100 w-sm-auto justify-content-end">
+                    <button
+                      onClick={() => window.print()}
+                      className="btn btn-solar-gradient rounded-pill btn-sm fw-bold px-3 py-2 d-flex align-items-center justify-content-center gap-1 shadow-sm w-100 w-sm-auto"
+                    >
+                      <FaPrint /> Print / Save PDF
+                    </button>
+                    <button
+                      onClick={() => shareQuotationOnWhatsApp(viewQuotation)}
+                      className="btn btn-success rounded-pill btn-sm fw-bold px-3 py-2 d-flex align-items-center justify-content-center gap-1 shadow-sm w-100 w-sm-auto"
+                    >
+                      <FaWhatsapp /> Send on WhatsApp
+                    </button>
+                    <button
+                      onClick={() => setViewQuotation(null)}
+                      className="btn btn-secondary rounded-pill btn-sm px-3 py-2 w-100 w-sm-auto"
+                    >
+                      Close
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

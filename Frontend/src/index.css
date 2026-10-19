@@ -1099,5 +1099,138 @@ h6 {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* ===================================================
+   VIBRANT SOLAR QUOTATION PROPOSAL & PRINT ENGINE
+   =================================================== */
+.quotation-printable-document {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 16px 40px -10px rgba(15, 23, 42, 0.15);
+  overflow: hidden;
+  color: #1e293b;
+}
+
+.quotation-header-banner {
+  background: linear-gradient(135deg, #091322 0%, #0f172a 45%, #1e293b 100%);
+  color: #ffffff;
+  padding: 1.75rem 2rem;
+  border-bottom: 4px solid #f59e0b;
+  position: relative;
+}
+
+.quotation-spec-pill {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 10px 14px;
+  transition: all 0.2s ease;
+}
+.quotation-spec-pill:hover {
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.quotation-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+
+.quotation-table th {
+  background: #0f172a !important;
+  color: #ffffff !important;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 11px 14px;
+  border: none;
+}
+
+.quotation-table td {
+  padding: 11px 14px;
+  vertical-align: middle;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 0.88rem;
+}
+
+.quotation-grand-total-box {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(234, 88, 12, 0.08) 100%);
+  border: 2px solid #f59e0b;
+  border-radius: 14px;
+  padding: 14px 18px;
+}
+
+.quotation-subsidy-card {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(6, 182, 212, 0.08) 100%);
+  border: 1.5px dashed #10b981;
+  border-radius: 14px;
+  padding: 14px 18px;
+}
+
+@media (max-width: 767.98px) {
+  .quotation-header-banner {
+    padding: 1.25rem 1rem;
+  }
+  .quotation-printable-document {
+    border-radius: 12px;
+  }
+  .quotation-table {
+    min-width: 580px; /* Ensures columns stay properly aligned and readable */
+  }
+}
+
+/* Print specific styles for exact 1-page A4 PDF output */
+@media print {
+  body, html {
+    background: #ffffff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  .quotation-printable-document,
+  .quotation-printable-document * {
+    visibility: visible;
+  }
+
+  .quotation-printable-document {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  .no-print,
+  .no-print * {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Force background colors and gradients in print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 8mm;
+  }
+}
+
+
 
 
